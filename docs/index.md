@@ -8,10 +8,10 @@ hero:
   actions:
     - theme: brand
       text: View Documentation
-      link: /markdown-examples
+      link: /user-docs/getting-started/overview
     - theme: alt
       text: Explore API Reference
-      link: /api-examples
+      link: /api-reference/operations/
 
 features:
   - title: RESTful API Standards

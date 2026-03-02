@@ -8,6 +8,16 @@
             "name": "Transactionify API Support"
         }
     },
+    "servers": [
+        {
+        "url": "https://gj7edrv1il.execute-api.us-east-1.amazonaws.com",
+        "description": "Production (Live Dummy Service)"
+        },
+        {
+        "url": "http://localhost:3000",
+        "description": "Local Development"
+        }
+    ],
     "security": [
         {
             "ApiKeyAuth": []

@@ -1,0 +1,189 @@
+{
+  "info": {
+    "_postman_id": "7f8b0e75-0c5a-4a2e-9b7b-8f2e2a1a1b11",
+    "name": "Transactionify API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Transactionify API collection (Accounts, Payments, Balance, Transactions). Uses collection variables: base_url, api_key, account_id, currency, amount_value, limit, cursor."
+  },
+  "item": [
+    {
+      "name": "Accounts",
+      "item": [
+        {
+          "name": "01 - Create Account (POST /api/v1/accounts)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "if (json && json.id) {",
+                  "  pm.collectionVariables.set('account_id', json.id);",
+                  "  console.log('Saved account_id:', json.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "APIKey {{api_key}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currency\": \"{{currency}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/accounts",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "accounts"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "02 - Create Payment (POST /api/v1/accounts/:account_id/payments)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "APIKey {{api_key}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": {\n    \"value\": \"{{amount_value}}\",\n    \"currency\": \"{{currency}}\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/accounts/{{account_id}}/payments",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "accounts", "{{account_id}}", "payments"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Balance",
+      "item": [
+        {
+          "name": "03 - Get Balance (GET /api/v1/accounts/:account_id/balance)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "APIKey {{api_key}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/accounts/{{account_id}}/balance",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "accounts", "{{account_id}}", "balance"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "04 - List Transactions (GET /api/v1/accounts/:account_id/transactions)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json && json.next_cursor) {",
+                  "  pm.collectionVariables.set('cursor', json.next_cursor);",
+                  "  console.log('Saved cursor:', json.next_cursor);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "APIKey {{api_key}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/accounts/{{account_id}}/transactions?limit={{limit}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "accounts", "{{account_id}}", "transactions"],
+              "query": [
+                { "key": "limit", "value": "{{limit}}" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "05 - List Transactions (Next Page using cursor)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "APIKey {{api_key}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/accounts/{{account_id}}/transactions?limit={{limit}}&cursor={{cursor}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "accounts", "{{account_id}}", "transactions"],
+              "query": [
+                { "key": "limit", "value": "{{limit}}" },
+                { "key": "cursor", "value": "{{cursor}}" }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Collection-level pre-request hook (optional)",
+          "// Keeps variables sane and provides defaults if missing.",
+          "if (!pm.collectionVariables.get('base_url')) {",
+          "  pm.collectionVariables.set('base_url', 'https://gj7edrv1il.execute-api.us-east-1.amazonaws.com');",
+          "}",
+          "if (!pm.collectionVariables.get('currency')) {",
+          "  pm.collectionVariables.set('currency', 'USD');",
+          "}",
+          "if (!pm.collectionVariables.get('amount_value')) {",
+          "  pm.collectionVariables.set('amount_value', '100.00');",
+          "}",
+          "if (!pm.collectionVariables.get('limit')) {",
+          "  pm.collectionVariables.set('limit', '20');",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "https://gj7edrv1il.execute-api.us-east-1.amazonaws.com", "type": "string" },
+    { "key": "api_key", "value": "REPLACE_ME", "type": "string" },
+    { "key": "account_id", "value": "", "type": "string" },
+    { "key": "currency", "value": "USD", "type": "string" },
+    { "key": "amount_value", "value": "100.00", "type": "string" },
+    { "key": "limit", "value": "20", "type": "string" },
+    { "key": "cursor", "value": "", "type": "string" }
+  ]
+}

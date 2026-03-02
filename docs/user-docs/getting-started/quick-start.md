@@ -2,6 +2,14 @@
 
 This quick guide is designed to walk you through your first successful integration with Transactionify.
 
+# Postman Collection
+
+Download the official Transactionify Postman collection:
+
+<a href="../../postman/collection.json" class="download-btn" download>
+  Download Postman Collection
+</a>
+
 ## Create an Account
 
 ### Request
