@@ -67,7 +67,7 @@ All data is sent and received in JSON format.
 :::
 
 ::: details Success Response
-json
+```json
 {
     "success": true, //boolean, shows if operation succeeded (similar to HTTP status)
     "payload": null, //object in other cases
@@ -79,11 +79,11 @@ json
         }
     }
 }
-
+```
 :::
 
 ::: details Error Response
-json
+```json
 {
     "success": false,
     "error": "Requested service is not availabile", //main error message
@@ -91,7 +91,7 @@ json
     "payload": null,
     "additional_data": null
 }
-
+```
 :::
 
 ### Date Format
