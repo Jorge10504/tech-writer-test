@@ -10,7 +10,7 @@ export default {
   extends: DefaultTheme,
   Layout: () => h(DefaultTheme.Layout),
   enhanceApp({ app, router, siteData }) {
-    useOpenapi({ spec })            // <- IMPORTANT
+    useOpenapi({ spec })
     openApiTheme.enhanceApp({ app, router, siteData })
   }
 } satisfies Theme

@@ -118,18 +118,18 @@ This is a list of status codes returned by RESTful APIs.
 
 | Status Code | Name                   | Description                                         |
 |-------------|------------------------|-----------------------------------------------------|
-| 200       | OK                     | Request completed                                   |
-| 201       | Created                | New record was created                              |
-| 400       | Bad Request            | Request was not understood                          |
-| 401       | Unauthorized           | Invalid API token or access to endpoint not allowed |
-| 403       | Forbidden              | Request not allowed                                 |
-| 404       | Not Found              | Resource unavailable                                |
-| 410       | Gone                   | Old resource permanently removed                    |
-| 415       | Unsupported Media Type | Feature is not enabled                              |
-| 429       | Too Many Requests      | Rate limit has been exceeded                        |
-| 500       | Internal Server Error  | Invalid method                                      |
-| 501       | Not Implemented        | Non-existent functionality                          |
-| 503       | Service Unavailable    | Down for maintenance                                |
+| 200         | OK                     | Request completed                                   |
+| 201         | Created                | New record was created                              |
+| 400         | Bad Request            | Request was not understood                          |
+| 401         | Unauthorized           | Invalid API token or access to endpoint not allowed |
+| 403         | Forbidden              | Request not allowed                                 |
+| 404         | Not Found              | Resource unavailable                                |
+| 410         | Gone                   | Old resource permanently removed                    |
+| 415         | Unsupported Media Type | Feature is not enabled                              |
+| 429         | Too Many Requests      | Rate limit has been exceeded                        |
+| 500         | Internal Server Error  | Invalid method                                      |
+| 501         | Not Implemented        | Non-existent functionality                          |
+| 503         | Service Unavailable    | Down for maintenance                                |
 
 ### Authentication
 

@@ -15,7 +15,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
+      { text: 'Documentation', link: '/user-docs/getting-started/overview' },
       { text: 'API Reference', link: '/api-reference/operations/' }
     ],
 
@@ -25,6 +25,29 @@ export default defineConfig({
           linkPrefix: '/api-reference/operations/'
         })
       ],
+      '/user-docs/': [
+        {
+          text: 'Getting Started',
+          items: [
+            { text: 'Overview', link: '/user-docs/getting-started/overview' },
+            { text: 'Authentication', link: '/user-docs/getting-started/authentication' },
+            { text: 'Quick Start', link: '/user-docs/getting-started/quick-start' }
+          ]
+        },
+        {
+          text: 'Reference',
+          items: [
+            { text: 'Data Model', link: '/user-docs/reference/model' },
+            { text: 'Pagination', link: '/user-docs/reference/pagination' }
+          ]
+        },
+        {
+          text: 'Support',
+          items: [
+            { text: 'Common Errors', link: '/user-docs/support/errors' },
+          ]
+        }
+      ]
     },
 
     socialLinks: [
