@@ -457,7 +457,7 @@
                 "type": "apiKey",
                 "in": "header",
                 "name": "Authorization",
-                "description": "API Key authentication. Use the format: `APIKey <your-api-key>`\n\nExample: `Authorization: APIKey 3ccff962-c5d8-7d13-84ea-768712380a09`\n"
+                "description": "API Key authentication. Use the format: `APIKey <your-api-key>`\n\nExample: `Authorization: APIKey xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`"
             }
         },
         "parameters": {
