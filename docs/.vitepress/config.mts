@@ -1,26 +1,32 @@
 import { defineConfig } from 'vitepress'
+import { useSidebar } from 'vitepress-openapi'
+import spec from './data/openapi.json' with { type: 'json' }
 
-// https://vitepress.dev/reference/site-config
+const oasSidebar = useSidebar({
+  spec,
+  linkPrefix:'/api-reference/operations/'
+})
+
 export default defineConfig({
   title: "Transactionify",
   description: "Tech Writing Test",
   base: '/tech-writer-test/',
+
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Examples', link: '/markdown-examples' },
+      { text: 'API Reference', link: '/api-reference/operations/' }
     ],
 
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      }
-    ],
+    sidebar: {
+      '/api-reference/': [
+        ...oasSidebar.generateSidebarGroups({
+          linkPrefix: '/api-reference/operations/'
+        })
+      ],
+    },
+
     socialLinks: [
       { icon: 'github', link: 'https://github.com/Jorge10504/tech-writer-test' }
     ]
